@@ -25,7 +25,7 @@ WriteMakefile(
         resources => {
             homepage => 'https://github.com/Syaltut/perl-App-perldolicicous',
             repository =>
-              'git@github.com:Syaltut/perl-App-perldolicicous.git',
+              'https://github.com/Syaltut/perl-App-perldolicicous.git',
         }
     }
 );
