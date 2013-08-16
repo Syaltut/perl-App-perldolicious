@@ -8,10 +8,10 @@ Module::Build->new(
     create_readme     => 1,
     script_files      => ['bin/perldolicious'],
     requires          => {
-        'Mojolicious'         => 0,
-        'Module::CoreList'    => 0,
-        'Pod::Cpandoc'        => 0,
-        'IO::Zlib'            => 0,
+        'Mojolicious'         => '4.07',
+        'Module::CoreList'    => '2.91',
+        'Pod::Cpandoc'        => '0.15',
+        'IO::Zlib'            => '1.10',
         'IPC::System::Simple' => '1.21',
     },
     meta_merge => {
