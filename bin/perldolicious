@@ -12,7 +12,7 @@ use Module::CoreList    ();
 use Mojo::JSON          ();
 use Storable            ();
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 $VERSION = eval $VERSION;
 
 sub parse_cpan_package_file {
@@ -369,7 +369,7 @@ perldolicious - Mojolicious::Lite webapp that lets you search (with regexp) and 
 
 =head1 VERSION
 
-Version 0.001.
+Version 0.002.
 
 =head1 SYNOPSIS
 
