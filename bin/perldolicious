@@ -457,6 +457,16 @@ specified amount of time).
 
 =back
 
+=head1 SEE ALSO
+
+=over
+
+=item * L<Mojolicious>
+
+=item * L<Pod::Cpandoc>
+
+=back
+
 =head1 AUTHOR
 
 Ahmad Syaltut <Isyaltut@gmail.com>
