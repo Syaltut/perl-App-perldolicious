@@ -6,7 +6,7 @@ build_requires: {}
 configure_requires:
   Module::Build: 0.40
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4004, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Module::Build version 0.4005, CPAN::Meta::Converter version 2.130880'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,10 +15,9 @@ name: App-perldolicious
 provides:
   App::perldolicious:
     file: lib/App/perldolicious.pm
-    version: 0.003
+    version: 0.004
 requires:
   IO::Zlib: 1.10
-  IPC::System::Simple: 1.21
   Module::CoreList: 2.91
   Mojolicious: 4.07
   Pod::Cpandoc: 0.15
@@ -26,4 +25,4 @@ resources:
   homepage: https://github.com/Syaltut/perl-App-perldolicicous
   license: http://dev.perl.org/licenses/
   repository: git://github.com/Syaltut/perl-App-perldolicicous.git
-version: 0.003
+version: 0.004
