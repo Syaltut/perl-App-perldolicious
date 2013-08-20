@@ -7,7 +7,6 @@ use 5.010;
 use File::Path ();
 use File::Spec::Functions qw(catfile);
 use IO::Zlib            ();
-use IPC::System::Simple ();
 use Module::CoreList    ();
 use Mojo::JSON          ();
 use Storable            ();
@@ -146,10 +145,7 @@ helper perldoc => sub {
         else                   { '-t' }
     };
 
-    local $@;
-    eval { $doc = IPC::System::Simple::capturex('cpandoc', $args, $module); };
-
-    $doc = undef if $@;
+    $doc = `cpandoc $args $module`;
 
     return $doc;
 };
@@ -207,7 +203,7 @@ get '/doc/:module' => sub {
     my $release_date  = Module::CoreList->first_release($module);
 
     # TODO: add this for other operating systems
-    my @known_temp_dirs = ("/var/folders", "/tmp/");
+    my @known_temp_dirs = (qr{/var/folders}, qr{/tmp/}, qr{Local\\Temp});
     my $location = $self->perldoc($module, { location => 1 });
 
     if ($location) {
