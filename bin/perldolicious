@@ -145,7 +145,7 @@ helper perldoc => sub {
         else                { '-t' }
     };
 
-    $doc = `cpandoc $args $module`;
+    chomp($doc = `cpandoc $args $module`);
 
     return $doc;
 };
