@@ -32,7 +32,7 @@
    "provides" : {
       "App::perldolicious" : {
          "file" : "lib/App/perldolicious.pm",
-         "version" : "0.005"
+         "version" : "0.006"
       }
    },
    "release_status" : "stable",
@@ -45,5 +45,5 @@
          "url" : "git://github.com/Syaltut/perl-App-perldolicicous.git"
       }
    },
-   "version" : "0.005"
+   "version" : "0.006"
 }
