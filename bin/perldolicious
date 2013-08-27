@@ -60,9 +60,7 @@ sub compile_pattern {
     die "No pattern specified\n" unless $pattern;
 
     local $@;
-    eval {
-        $pattern = $p->{ignore_case} ? qr{$pattern}i : qr{$pattern};
-    };
+    eval { $pattern = $p->{ignore_case} ? qr{$pattern}i : qr{$pattern}; };
     die "Invalid regular expression\n" if $@;
 
     return $pattern;
@@ -88,8 +86,7 @@ helper initial_debug => sub {
 
     app->log->info("Config dir: $config_dir");
     app->log->info("Loaded config file: $config_file") if -f $config_file;
-    app->log->info(
-        'Loaded cache file: ' . app->config('modules_cache_file'));
+    app->log->info('Loaded cache file: ' . app->config('modules_cache_file'));
 };
 
 helper setup_modules_file => sub {
@@ -113,8 +110,8 @@ helper setup_modules_file => sub {
 
         my $url    = 'http://www.cpan.org/modules/02packages.details.txt.gz';
         my $tmpdir = File::Temp->newdir;
-        my $download_location = File::Spec->catfile($tmpdir->dirname,
-            File::Basename::basename($url));
+        my $download_location =
+          catfile($tmpdir->dirname, File::Basename::basename($url));
 
         app->log->info("Downloading $url to $download_location")
           unless $quiet;
@@ -124,7 +121,7 @@ helper setup_modules_file => sub {
           unless $quiet;
         write_modules($cache_file, $download_location);
 
-        undef $tmpdir; # delete the temp dir and its contents
+        undef $tmpdir;    # delete the temp dir and its contents
     }
 };
 
