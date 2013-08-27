@@ -86,6 +86,8 @@ helper setup_modules_file => sub {
     my $file  = app->config('modules_cache_file');
     my $limit = app->config('auto_delete');
 
+    require Scalar::Util;
+
     die "Configuration auto_delete: $limit doesn't look like number\n"
       unless Scalar::Util::looks_like_number($limit);
 

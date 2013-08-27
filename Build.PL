@@ -13,6 +13,7 @@ Module::Build->new(
         'Module::Path'        => '0.09',
         'Pod::Cpandoc'        => '0.15',
         'IO::Zlib'            => '1.10',
+        'Scalar::Util'        => 0,
     },
     meta_merge => {
         resources => {
