@@ -167,11 +167,8 @@ helper find_modules => sub {
 
 helper perldoc => sub {
     my ($self, $module, $p) = @_;
-    my $doc;
-
     my $args = $p->{source} ? '-m' : '-t';
-    chomp($doc = `cpandoc $args $module`);
-
+    chomp(my $doc = `cpandoc $args $module`);
     return $doc;
 };
 
@@ -227,14 +224,10 @@ get '/doc/:module' => sub {
     my ($modstripped) = $module =~ s{::}{-}gr;
     my $release_date  = Module::CoreList->first_release($module);
 
-    # TODO: add this for other operating systems
     my @known_temp_dirs = (qr{/var/folders}, qr{/tmp/}, qr{Local\\Temp});
     my $location = Module::Path::module_path($module);
 
-    if ($location) {
-        $location = undef
-          if grep { $location =~ $_ } @known_temp_dirs;
-    }
+    $location = undef if $location and grep { /$location/ } @known_temp_dirs;
 
     $self->render(
         template        => "doc",
