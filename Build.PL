@@ -21,6 +21,12 @@ Module::Build->new(
         'Scalar::Util'     => 0,
         'Storable'         => 0,
     },
+    test_requires => {
+        'FindBin'    => 0,
+        'Net::Ping'  => 0,
+        'Test::Mojo' => 0,
+        'Test::More' => 0,
+    },
     meta_merge => {
         resources => {
             homepage => 'https://github.com/Syaltut/perl-App-perldolicious',
