@@ -185,11 +185,7 @@ post '/results' => sub {
     };
 
     if ($@) {
-        $self->render(
-            template => 'error',
-            message  => "Error: $@",
-            status   => 500
-        );
+        $self->render_exception($@);
     }
     elsif (@$modules) {
         $self->render(
@@ -199,11 +195,7 @@ post '/results' => sub {
         );
     }
     else {
-        $self->render(
-            status   => 500,
-            template => 'error',
-            message  => "Could not find modules that match $pattern"
-        );
+        $self->render_exception("Could not find modules that match $pattern");
     }
 };
 
@@ -265,6 +257,12 @@ body {
     <%= content %>
   </body>
 </html>
+
+@@ exception.production.html.ep
+
+% title 'Error';
+
+<blink style="color: red"><%= $exception->message %></blink>
 
 @@ index.html.ep
 
@@ -353,14 +351,6 @@ body {
 <pre>
 <%= $source_code %>
 </pre>
-
-@@ error.html.ep
-<!-- ugly hack since I don't know how to customize the message inside the
-     exception template -->
-% title "Error";
-
-<!-- SERIOUS BUSINESS!! -->
-<blink style="color: red"><%= $message %></blink>
 
 __END__
 
