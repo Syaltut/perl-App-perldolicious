@@ -61,6 +61,7 @@
 ^MYMETA\.
 
 \.hg/
+\.hgtags
 \.git/
 
 # Avoid Module::Build generated and utility files.
