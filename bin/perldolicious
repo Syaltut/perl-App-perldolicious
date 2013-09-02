@@ -103,7 +103,7 @@ helper setup_modules_file => sub {
 helper setup_log => sub {
     my ($self, $confdir) = @_;
     my $logfile = catfile($confdir, 'server.log');
-    my $limit   = 2_000_000; # 2MB
+    my $limit = 2_000_000;    # 2MB
     if (-f $logfile and -s $logfile > $limit) {
         unlink $logfile or die "Could not delete '$logfile'";
         app->log->info("Deleting $logfile");
@@ -151,7 +151,7 @@ helper find_modules => sub {
     my $modules_cache_file = app->config('modules_cache_file');
 
     state $modules = Storable::retrieve($modules_cache_file);
-    return [ grep { /$pattern/ } @$modules ];
+    return [grep { /$pattern/ } @$modules];
 };
 
 helper perldoc => sub {
@@ -200,10 +200,11 @@ post '/results' => sub {
 };
 
 get '/doc/:module' => sub {
-    my $self          = shift;
-    my $module        = $self->param('module');
-    my ($modstripped) = $module =~ s{::}{-}gr;
-    my $release_date  = Module::CoreList->first_release($module);
+    my $self   = shift;
+    my $module = $self->param('module');
+
+    (my $distname = $module) =~ s{::}{-}g;
+    my $release_date = Module::CoreList->first_release($module);
 
     my @known_temp_dirs = (qr{/var/folders}, qr{/tmp/}, qr{Local\\Temp});
     my $location = Module::Path::module_path($module);
@@ -213,7 +214,7 @@ get '/doc/:module' => sub {
     $self->render(
         template        => "doc",
         module          => $module,
-        modstripped     => $modstripped,
+        distname        => $distname,
         doc             => $self->perldoc($module),
         location        => $location,
         release_date    => $release_date,
@@ -227,7 +228,7 @@ get '/doc/:module/source' => sub {
     $self->render(
         module      => $module,
         template    => 'source',
-        source_code => $self->perldoc($module, { source => 1 }),
+        source_code => $self->perldoc($module, {source => 1}),
     );
 };
 
@@ -337,7 +338,7 @@ body {
     </a>
   </li>
   <li>
-    <a href="http://cpanratings.perl.org/dist/<%= $modstripped %>">
+    <a href="http://cpanratings.perl.org/dist/<%= $distname %>">
         cpanratings
     </a>
   </li>
