@@ -3,7 +3,7 @@ NAME
     regexp) and display CPAN modules documentation
 
 VERSION
-    Version 0.009.
+    Version 0.010.
 
 SYNOPSIS
       perldolicious daemon
@@ -72,4 +72,3 @@ COPYRIGHT AND LICENSE
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
-

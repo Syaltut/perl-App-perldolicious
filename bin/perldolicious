@@ -7,6 +7,7 @@ use 5.010;
 use File::Path ();
 use File::Spec::Functions qw(catfile);
 use File::Temp       ();
+use File::Which      ();
 use IO::Zlib         ();
 use Mojo::UserAgent  ();
 use Module::CoreList ();
@@ -15,7 +16,7 @@ use Mojo::JSON       ();
 use Scalar::Util     ();
 use Storable         ();
 
-our $VERSION = '0.009';
+our $VERSION = '0.010';
 $VERSION = eval $VERSION;
 
 sub get_modules {
@@ -113,6 +114,11 @@ helper setup_log => sub {
 };
 
 helper initialize => sub {
+    # for some reason cpandoc is not installed on some machines, even though
+    # Pod::Cpandoc is already listed as a prereq in Build.PL
+    die "cpandoc is not installed on your system\n"
+      unless File::Which::which('cpandoc');
+
     my $confdir = $ENV{PERLDOLICIOUS_HOME}
       || catfile($ENV{HOME}, '.perldolicious');
 
@@ -181,7 +187,7 @@ post '/results' => sub {
 
     eval {
         $modules =
-          $self->find_modules($pattern, { ignore_case => $ignore_case });
+          $self->find_modules($pattern, {ignore_case => $ignore_case});
     };
 
     if ($@) {
@@ -363,7 +369,7 @@ perldolicious - Mojolicious::Lite webapp that lets you search (with regexp) and 
 
 =head1 VERSION
 
-Version 0.009.
+Version 0.010.
 
 =head1 SYNOPSIS
 
